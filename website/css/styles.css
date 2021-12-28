@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+
+    overflow: hidden;
+}
+
+#popup-container {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+
+    pointer-events: none;
+
+    overflow: hidden;
+}
+
+#popup {
+    height: 100px;
+
+    transition: transform 1s;
+}
+
+.hide {
+    transform: translateY(100px);
+}
+
+#copyright {
+    position: fixed;
+    bottom: 0;
+    right: 1px;
+}

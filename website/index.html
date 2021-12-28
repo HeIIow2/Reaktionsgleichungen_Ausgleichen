@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Chemie</title>
+
+    <!--css and fonts-->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+
+    <!--js-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+<div class="container-fluid p-5 bg-primary text-white text-center" id="head">
+    <h1>Chemie GFS</h1>
+    <p>
+        Dies ist ein Werkzeug um Reaktionsgleichungen einzurichten.
+        <br>
+        Es wurde 2021 im Ramen einer Chemie GFS erstellt.
+    </p>
+</div>
+
+<div class="container mt-5">
+    <form>
+        <div class="form-group">
+            <label for="reaction-input">Eingabe der Reaktionsgleichung</label>
+            <input class="form-control mt-2" type="text" id="reaction-input" placeholder="H2 + O2 = H2O">
+        </div>
+        <div class="form-group mt-5">
+            <label for="output">Die eingerichtete Gleichung wird hier erscheinen.</label>
+            <input class="form-control mt-2" id="output" type="text" placeholder="Lösung" readonly>
+        </div>
+    </form>
+</div>
+
+<div id="popup-container">
+    <img src="assets/img/among-us.png" class="hide" id="popup">
+</div>
+
+<span id="copyright">
+© Lars Noack
+</span>
+
+<script src="js/input_output.js"></script>
+<script src="js/popup.js"></script>
+</body>
+</html>
