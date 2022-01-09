@@ -28,7 +28,6 @@ driver = webdriver.Firefox()
 driver.get("https://ln.topdf.de/chemie/")
 
 input_frame = driver.find_element_by_id("reaction-input")
-output_frame = driver.find_element_by_id("output")
 
 prev_len = 0
 for equation in equations:
@@ -39,6 +38,13 @@ for equation in equations:
 
     prev_len = len(equation)
     time.sleep(0.5)
+    input_frame = driver.find_element_by_id("reaction-input")
+    output_frame = driver.find_element_by_id("output")
     print(output_frame.get_attribute('value'))
-    if output_frame.get_attribute('value') == "invalid":
+    if output_frame.get_attribute('value') == "invalid" or output_frame.get_attribute('value') == "":
         debug(equation + '\n')
+        time.sleep(4)
+    input_frame = driver.find_element_by_id("reaction-input")
+    output_frame = driver.find_element_by_id("output")
+
+driver.close()

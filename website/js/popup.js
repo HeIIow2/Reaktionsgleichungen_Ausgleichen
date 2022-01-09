@@ -5,9 +5,12 @@ https://pixabay.com/de/illustrations/unter-uns-symbol-mannschaftskamerad-6008615
 Pixabay License
 Freie kommerzielle Nutzung
 Kein Bildnachweis nötig
+
+https://knowyourmeme.com/photos/2165975-pepe-the-frog
 */
 const src_list = [
-    "assets/img/among-us.png"
+    "assets/img/among-us.png",
+    "assets/img/pepe-the-frog.png"
 ];
 let temp_list = src_list.slice();
 temp_list.splice(1, 1);
@@ -23,8 +26,7 @@ function show_popup() {
 
 function hide_popup() {
     popup_elem.classList.add('hide');
-	
-	/*
+
 
     function random_src() {
         var index = Math.floor(Math.random() * temp_list.length)
@@ -43,7 +45,6 @@ function hide_popup() {
         const new_src = random_src();
         popup_elem.src = new_src;
     }, 1000);
-	*/
 }
 
 if (!(queryString.includes("hide"))) {

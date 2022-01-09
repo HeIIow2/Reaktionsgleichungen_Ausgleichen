@@ -2,7 +2,6 @@ const inputObj = document.getElementById('reaction-input');
 const outputObj = document.getElementById('output');
 
 function output(a){
-    console.log(JSON.stringify(a));
 }
 
 function isAlphaOrParen(str) {
@@ -144,8 +143,8 @@ class LGS {
                 if (i < possibleConstants.length) {
                     constant += this.equations[n][i] * possibleConstants[i];
                     output([this.equations[n][i], possibleConstants[i]])
-                    console.log(i)
-                    console.log(constant)
+
+
                 } else {
                     this.toSolve[n].push(this.equations[n][i]);
                 }
@@ -187,7 +186,7 @@ class LGS {
 
         this.toSolve = finalList;
 
-        console.log(len)
+
         output(this.toSolve);
 
         for (let i = 0; i < this.toSolve.length; i++) {
@@ -198,7 +197,7 @@ class LGS {
             }
         }
 
-        console.log('successful')
+
         return true;
     }
 }
@@ -376,7 +375,7 @@ class Equation {
             newList[minInd] = bigger;
         }
 
-        console.log(newList);
+
 
         return newList;
     }
@@ -469,11 +468,11 @@ class Equation {
         }
     }
 
-    get isPossible() {
+    get educt_dict() {
         let eductDict = {};
         for (let i = 0; i < this.educt.length; i++) {
             const tempDict = this.educt[i].atomDict;
-            console.log(tempDict);
+
 
             for (let n = 0; n < Object.keys(tempDict).length; n++) {
                 const key = Object.keys(tempDict)[n];
@@ -484,11 +483,14 @@ class Equation {
                 }
             }
         }
+        return eductDict;
+    }
 
+    get product_dict() {
         let productDict = {};
         for (let i = 0; i < this.product.length; i++) {
             const tempDict = this.product[i].atomDict;
-            console.log(tempDict);
+
 
             for (let n = 0; n < Object.keys(tempDict).length; n++) {
                 const key = Object.keys(tempDict)[n];
@@ -500,7 +502,15 @@ class Equation {
             }
         }
 
-        console.log(eductDict, productDict);
+        return productDict;
+    }
+
+    get isPossible() {
+        let eductDict = this.educt_dict;
+
+        let productDict = this.product_dict;
+
+
 
         if (Object.keys(eductDict).length !== Object.keys(productDict).length) {
             return false;
@@ -516,11 +526,32 @@ class Equation {
         return true;
     }
 
+    get matching_elements() {
+        let eductDict = this.educt_dict;
+        let productDict = this.product_dict;
+
+        for (let i = 0; i < Object.keys(eductDict).length; i++) {
+            const key_educt = Object.keys(eductDict)[i];
+
+            if(productDict[key_educt] === undefined) {
+                return false;
+            }
+        }
+        for (let i = 0; i < Object.keys(productDict).length; i++) {
+            const key_product = Object.keys(productDict)[i];
+
+            if(eductDict[key_product] === undefined) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     LGS() {
         let merged = this.educt.concat(this.product);
         let lgs = new LGS(merged.length);
 
-        console.log(merged)
+
 
         for (let askInd = 0; askInd < this.educt.length; askInd++) {
             const atomList = this.educt[askInd].atoms;
@@ -542,6 +573,8 @@ class Equation {
             }
         }
 
+
+
         // get a list for all trys of the left side
         const possibleCombinations = Equation.getCombinationList(25, this.educt.length);
 
@@ -556,16 +589,29 @@ class Equation {
             }
         }
 
+        if (!(this.matching_elements)) {
+            spawn_alert("Auf der Edukt und Produktseite müssen die gleichen Elemente stehen", 1000, 4);
+            setTimeout(function () {
+                location.reload();
+            }, 2000);
+            return "invalid";
+        }
+
         if (isInvalid) {
+            spawn_alert("something went wrong", 1000, 3);
+            setTimeout(function () {
+                location.reload();
+            }, 2000);
             return 'invalid';
         }
 
         this.productCoefficients = lgs.sollutions;
         this.saveCoefficients(lgs.sollutions, false);
-        console.log(this.eductCoefficients);
-        console.log(this.productCoefficients);
+
+
 
         if (!this.isPossible) {
+            spawn_alert("weights don't match", 1000, 3);
             return "weights don't match";
         }
 
