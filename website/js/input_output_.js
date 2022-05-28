@@ -620,13 +620,4 @@ class Equation {
 }
 
 let inputEqu = new Equation();
-
-inputObj.value = '';
-updateEquation();
-
-inputObj.addEventListener('change', updateEquation);
-function updateEquation() {
-    outputObj.value = inputEqu.saveStr(inputObj.value)
-}
-
 export {inputEqu};
